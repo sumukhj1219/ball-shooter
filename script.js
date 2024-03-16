@@ -124,6 +124,8 @@ const particles = []
 let scoreEl = document.getElementById('#score')
 let score = 0
 const audio = new Audio('./gunShot.mp3');
+const reload = new Audio('./reload.mp3');
+let counts  = 0;
 function animate()
 {
 	const id = requestAnimationFrame(animate)
@@ -181,6 +183,12 @@ function animate()
 
 addEventListener("click",(event)=>{
  const angle = Math.atan2(event.clientY-canvas.height/2, event.clientX-canvas.width/2)
+ counts=counts+1;
+ if(counts > 6)
+ {
+	counts = 0;
+	reload.play()
+ }
  audio.play();
  const velocity = {
 	x: Math.cos(angle),
