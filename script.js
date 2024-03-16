@@ -123,11 +123,9 @@ const projectiles = []
 const particles = []
 let scoreEl = document.getElementById('#score')
 let score = 0
+const audio = new Audio('./gunShot.mp3');
 function animate()
 {
-	
-	// var audio = new Audio('./audio.mp3');
-    // audio.play();
 	const id = requestAnimationFrame(animate)
 	c.fillStyle = 'rgba(0, 0, 0, 0.1)'
 	c.fillRect(0, 0, canvas.width, canvas.height)
@@ -150,6 +148,7 @@ function animate()
 			const dist = Math.hypot(projectile.x - enemy.x, projectile.y - enemy.y)
 			if(dist - enemy.radius - projectile.radius < 1)
 			{
+				
 				score=score+100
 				console.log(score)
 				scoreEl.innerHTML = score
@@ -180,8 +179,9 @@ function animate()
 
 
 
-addEventListener("mousemove",(event)=>{
+addEventListener("click",(event)=>{
  const angle = Math.atan2(event.clientY-canvas.height/2, event.clientX-canvas.width/2)
+ audio.play();
  const velocity = {
 	x: Math.cos(angle),
 	y: Math.sin(angle)
